@@ -58,31 +58,7 @@ UserService
 •	Methods:
 o	getUsers: Fetches the list of users.
 o	deleteUser: Deletes a user by ID.
-________________________________________
-Example API Integration
-Replace https://api.example.com/users with your actual API URL. Example implementation:
-user.service.ts
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class UserService {
-  private apiUrl = 'https://api.example.com/users';
-
-  constructor(private http: HttpClient) {}
-
-  getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
-  }
-
-  deleteUser(userId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${userId}`);
-  }
-}
-________________________________________
+______
 Notes
 1.	Ensure your API supports CORS for proper interaction with the Angular frontend.
 2.	Customize the dialog components (UserFormComponent and ConfirmationDialogComponent) as per your design.
