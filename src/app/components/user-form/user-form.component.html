@@ -1,0 +1,38 @@
+<h2 mat-dialog-title class="usertitle mt-4">{{ isEditMode ? 'Edit User' : 'Add User' }}</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
+  <div class="form-fields" fxLayout="column" fxLayoutGap="20px">
+    <!-- Name Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="userForm.get('name')?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+
+    <!-- Email Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="userForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="userForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+    </mat-form-field>
+
+    <!-- Role Field -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="Admin">Admin</mat-option>
+        <mat-option value="User">User</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userForm.get('role')?.hasError('required')">Role is required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+    <button mat-stroked-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+  </div>
+</form>
